@@ -9,6 +9,8 @@
 
 - [ ] https://bulma.io/documentation/
    > Site better than bootstrap [ Atleast for me ]
+- [ ] https://canary.giggl.app/
+   > A very good site to enojoy with friends,family. To watch online content.
    
 # Coding Help Sites
 
