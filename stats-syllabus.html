@@ -37,107 +37,109 @@
   
   <h2>Unit I: Probability and Random Variable</h2>
   <ul id="unit1">
-    <li>Deterministic and probabilistic approaches</li>
-    <li>Definition of Probability</li>
-    <li>Mutually Exclusive and exhaustive events</li>
-    <li>Conditional probability</li>
-    <li>Independence of events</li>
-    <li>Bayes' Theorem</li>
-    <li>Discrete & Continuous Random Variables</li>
-    <li>Probability Mass Functions</li>
-    <li>Probability Density Functions</li>
-    <li>Cumulative Distribution Functions</li>
-    <li>Mean, Variance and Expectation of Random Variables</li>
+    <li onclick="toggleCompletion(this)">Deterministic and probabilistic approaches</li>
+    <li onclick="toggleCompletion(this)">Definition of Probability</li>
+    <li onclick="toggleCompletion(this)">Mutually Exclusive and exhaustive events</li>
+    <li onclick="toggleCompletion(this)">Conditional probability</li>
+    <li onclick="toggleCompletion(this)">Independence of events</li>
+    <li onclick="toggleCompletion(this)">Bayes' Theorem</li>
+    <li onclick="toggleCompletion(this)">Discrete & Continuous Random Variables</li>
+    <li onclick="toggleCompletion(this)">Probability Mass Functions</li>
+    <li onclick="toggleCompletion(this)">Probability Density Functions</li>
+    <li onclick="toggleCompletion(this)">Cumulative Distribution Functions</li>
+    <li onclick="toggleCompletion(this)">Mean, Variance and Expectation of Random Variables</li>
   </ul>
   
   <h2>Unit II: Bernoulli Distribution, Binomial Probability Distributions, Poisson Distribution and Normal Distribution</h2>
   <ul id="unit2">
-    <li>Descriptive Statistics</li>
-    <li>Measures of central tendency</li>
-    <li>Measures of Dispersion</li>
-    <li>Numerical Summaries of Data</li>
-    <li>Frequency Distributions and Histograms</li>
-    <li>Scatter diagrams</li>
-    <li>Stem and Leaf Diagram</li>
-    <li>Box plots</li>
+    <li onclick="toggleCompletion(this)">Descriptive Statistics</li>
+    <li onclick="toggleCompletion(this)">Measures of central tendency</li>
+    <li onclick="toggleCompletion(this)">Measures of Dispersion</li>
+    <li onclick="toggleCompletion(this)">Numerical Summaries of Data</li>
+    <li onclick="toggleCompletion(this)">Frequency Distributions and Histograms</li>
+    <li onclick="toggleCompletion(this)">Scatter diagrams</li>
+    <li onclick="toggleCompletion(this)">Stem and Leaf Diagram</li>
+    <li onclick="toggleCompletion(this)">Box plots</li>
   </ul>
   
   <h2>Unit III: Types of Sampling</h2>
+  <ul id="unit3">
+    <!-- Add items here -->
+  </ul>
   
   <h2>Unit IV: Hypothesis Testing</h2>
   <ul id="unit4">
-    <li>Null and alternative hypotheses</li>
-    <li>The critical and acceptance regions</li>
-    <li>p-value in hypothesis test</li>
-    <li>Type of error</li>
-    <li>Power of test</li>
-    <li>Hypothesis testing for large and small sample</li>
-    <li>Test on the mean of normal distribution</li>
-    <li>Tests on the variance and standard deviation of a normal distribution</li>
-    <li>Tests on population proportion</li>
+    <li onclick="toggleCompletion(this)">Null and alternative hypotheses</li>
+    <li onclick="toggleCompletion(this)">The critical and acceptance regions</li>
+    <li onclick="toggleCompletion(this)">p-value in hypothesis test</li>
+    <li onclick="toggleCompletion(this)">Type of error</li>
+    <li onclick="toggleCompletion(this)">Power of test</li>
+    <li onclick="toggleCompletion(this)">Hypothesis testing for large and small sample</li>
+    <li onclick="toggleCompletion(this)">Test on the mean of normal distribution</li>
+    <li onclick="toggleCompletion(this)">Tests on the variance and standard deviation of a normal distribution</li>
+    <li onclick="toggleCompletion(this)">Tests on population proportion</li>
   </ul>
   
   <h2>Unit V: Correlation and Regression</h2>
   <ul id="unit5">
-    <li>Least square method</li>
-    <li>Linear correlation and regression</li>
-    <li>Karl Pearson's and Spearman's Correlation coefficient</li>
-    <li>Properties of the linear regression</li>
-    <li>Least square regression line y on x and x on y</li>
-    <li>Basic non-linear regression</li>
-    <li>Statistical fallacy</li>
+    <li onclick="toggleCompletion(this)">Least square method</li>
+    <li onclick="toggleCompletion(this)">Linear correlation and regression</li>
+    <li onclick="toggleCompletion(this)">Karl Pearson's and Spearman's Correlation coefficient</li>
+    <li onclick="toggleCompletion(this)">Properties of the linear regression</li>
+    <li onclick="toggleCompletion(this)">Least square regression line y on x and x on y</li>
+    <li onclick="toggleCompletion(this)">Basic non-linear regression</li>
+    <li onclick="toggleCompletion(this)">Statistical fallacy</li>
   </ul>
 
   <script>
-    // Retrieve the checklist data from local storage and update the checkboxes
-    function updateCheckboxes() {
-      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-      checkboxes.forEach(function(checkbox) {
-        const key = checkbox.getAttribute('data-key');
-        const value = localStorage.getItem(key);
-        if (value !== null) {
-          checkbox.checked = value === 'true';
-          updateListItemStyle(checkbox, value === 'true');
-        }
-      });
+    // Function to toggle completion status and store in local storage
+    function toggleCompletion(item) {
+      item.classList.toggle("completed");
+      
+      // Get the unit and index of the clicked item
+      const unit = item.parentNode.id;
+      const index = Array.prototype.indexOf.call(item.parentNode.children, item);
+      
+      // Get the current checklist data from local storage
+      let checklistData = JSON.parse(localStorage.getItem("checklistData")) || {};
+      
+      // Update the completion status in the checklist data
+      if (!checklistData[unit]) {
+        checklistData[unit] = {};
+      }
+      checklistData[unit][index] = item.classList.contains("completed");
+      
+      // Store the updated checklist data in local storage
+      localStorage.setItem("checklistData", JSON.stringify(checklistData));
     }
-
-    // Update the style of the list item based on checkbox state
-    function updateListItemStyle(checkbox, isChecked) {
-      const listItem = checkbox.parentNode;
-      if (isChecked) {
-        listItem.classList.add('completed');
-      } else {
-        listItem.classList.remove('completed');
+    
+    // Function to load checklist data from local storage
+    function loadChecklistData() {
+      const checklistData = JSON.parse(localStorage.getItem("checklistData"));
+      
+      if (checklistData) {
+        // Iterate over each unit in the checklist data
+        for (const unit in checklistData) {
+          if (checklistData.hasOwnProperty(unit)) {
+            // Iterate over each item in the unit
+            for (const index in checklistData[unit]) {
+              if (checklistData[unit].hasOwnProperty(index)) {
+                const completed = checklistData[unit][index];
+                
+                // Find the corresponding item in the DOM and update its completion status
+                const item = document.getElementById(unit).children[index];
+                if (completed) {
+                  item.classList.add("completed");
+                }
+              }
+            }
+          }
+        }
       }
     }
-
-    // Save the checkbox state to local storage
-    function saveCheckboxState(checkbox) {
-      const key = checkbox.getAttribute('data-key');
-      const value = checkbox.checked;
-      localStorage.setItem(key, value);
-      updateListItemStyle(checkbox, value);
-    }
-
-    // Attach event listeners to the checkboxes
-    function attachEventListeners() {
-      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-      checkboxes.forEach(function(checkbox) {
-        checkbox.addEventListener('change', function() {
-          saveCheckboxState(checkbox);
-        });
-      });
-    }
-
-    // Initialize the checklist functionality
-    function initializeChecklist() {
-      updateCheckboxes();
-      attachEventListeners();
-    }
-
-    // Call the initializeChecklist function when the DOM is ready
-    document.addEventListener('DOMContentLoaded', initializeChecklist);
+    
+    // Load checklist data when the page is loaded
+    window.onload = loadChecklistData;
   </script>
 </body>
 </html>
