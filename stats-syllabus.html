@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Statistics and Probability</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    
+    h2 {
+      color: #666;
+    }
+    
+    p {
+      color: #444;
+    }
+    
+    ul {
+      color: #555;
+      margin-left: 20px;
+    }
+    
+    .completed {
+      text-decoration: line-through;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>Statistics and Probability</h1>
+  
+  <h2>Unit I: Probability and Random Variable</h2>
+  <ul id="unit1">
+    <li>Deterministic and probabilistic approaches</li>
+    <li>Definition of Probability</li>
+    <li>Mutually Exclusive and exhaustive events</li>
+    <li>Conditional probability</li>
+    <li>Independence of events</li>
+    <li>Bayes' Theorem</li>
+    <li>Discrete & Continuous Random Variables</li>
+    <li>Probability Mass Functions</li>
+    <li>Probability Density Functions</li>
+    <li>Cumulative Distribution Functions</li>
+    <li>Mean, Variance and Expectation of Random Variables</li>
+  </ul>
+  
+  <h2>Unit II: Bernoulli Distribution, Binomial Probability Distributions, Poisson Distribution and Normal Distribution</h2>
+  <ul id="unit2">
+    <li>Descriptive Statistics</li>
+    <li>Measures of central tendency</li>
+    <li>Measures of Dispersion</li>
+    <li>Numerical Summaries of Data</li>
+    <li>Frequency Distributions and Histograms</li>
+    <li>Scatter diagrams</li>
+    <li>Stem and Leaf Diagram</li>
+    <li>Box plots</li>
+  </ul>
+  
+  <h2>Unit III: Types of Sampling</h2>
+  
+  <h2>Unit IV: Hypothesis Testing</h2>
+  <ul id="unit4">
+    <li>Null and alternative hypotheses</li>
+    <li>The critical and acceptance regions</li>
+    <li>p-value in hypothesis test</li>
+    <li>Type of error</li>
+    <li>Power of test</li>
+    <li>Hypothesis testing for large and small sample</li>
+    <li>Test on the mean of normal distribution</li>
+    <li>Tests on the variance and standard deviation of a normal distribution</li>
+    <li>Tests on population proportion</li>
+  </ul>
+  
+  <h2>Unit V: Correlation and Regression</h2>
+  <ul id="unit5">
+    <li>Least square method</li>
+    <li>Linear correlation and regression</li>
+    <li>Karl Pearson's and Spearman's Correlation coefficient</li>
+    <li>Properties of the linear regression</li>
+    <li>Least square regression line y on x and x on y</li>
+    <li>Basic non-linear regression</li>
+    <li>Statistical fallacy</li>
+  </ul>
+
+  <script>
+    // Retrieve the checklist data from local storage and update the checkboxes
+    function updateCheckboxes() {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(function(checkbox) {
+        const key = checkbox.getAttribute('data-key');
+        const value = localStorage.getItem(key);
+        if (value !== null) {
+          checkbox.checked = value === 'true';
+          updateListItemStyle(checkbox, value === 'true');
+        }
+      });
+    }
+
+    // Update the style of the list item based on checkbox state
+    function updateListItemStyle(checkbox, isChecked) {
+      const listItem = checkbox.parentNode;
+      if (isChecked) {
+        listItem.classList.add('completed');
+      } else {
+        listItem.classList.remove('completed');
+      }
+    }
+
+    // Save the checkbox state to local storage
+    function saveCheckboxState(checkbox) {
+      const key = checkbox.getAttribute('data-key');
+      const value = checkbox.checked;
+      localStorage.setItem(key, value);
+      updateListItemStyle(checkbox, value);
+    }
+
+    // Attach event listeners to the checkboxes
+    function attachEventListeners() {
+      const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('change', function() {
+          saveCheckboxState(checkbox);
+        });
+      });
+    }
+
+    // Initialize the checklist functionality
+    function initializeChecklist() {
+      updateCheckboxes();
+      attachEventListeners();
+    }
+
+    // Call the initializeChecklist function when the DOM is ready
+    document.addEventListener('DOMContentLoaded', initializeChecklist);
+  </script>
+</body>
+</html>
